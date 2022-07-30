@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.lti.dao.UserDao;
+import com.lti.dto.LoginResponseDto;
 import com.lti.entity.CardType;
 import com.lti.entity.User;
 
@@ -33,10 +34,10 @@ public class UserDaoTest {
 	public void addOrUpdateUserTest() {
 
 		User user = new User();
-		user.setFullName("smith");
-		user.setEmail("smith123@gmail.com");
+		user.setFullName("raj");
+		user.setEmail("raj@gmail.com");
 		
-		user.setUserPassword("smith123");
+		user.setUserPassword("raj123");
 		user.setUserPhone("7789456123");
 		user.setUserAddress("A wing ,room no-802");
 		user.setCardType(CardType.gold.toString());
@@ -69,7 +70,7 @@ public class UserDaoTest {
 
 	@Test
 	public void login() {
-		boolean isValidUser = userDao.login(200, "john123");
+		boolean isValidUser = userDao.login(200, "john123").getUser().isEligible();
 		assertTrue(isValidUser);
 		
 	}

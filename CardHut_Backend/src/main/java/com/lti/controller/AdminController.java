@@ -20,15 +20,16 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-	@PutMapping("/activate/{emiCardNo}")
-	public boolean activateCard(@PathVariable int emiCardNo) {
-		return adminService.activateCard(emiCardNo);
+	@PutMapping("/activate/{userId}")
+	public boolean activateUserAndAddCard(@PathVariable int userId) {
+		return adminService.activateUserAndAddCard(userId);
 	}
 	
 	@PostMapping("/login")
 	public boolean login(@RequestBody AdminLoginDto adminloginData) {
-		boolean isValid = adminService.adminLogin(adminloginData.getUsername(), adminloginData.getPassword());
-		return isValid;
+	
+		return adminService.adminLogin(adminloginData.getUsername(), adminloginData.getPassword());
+
 	}
 	
 }

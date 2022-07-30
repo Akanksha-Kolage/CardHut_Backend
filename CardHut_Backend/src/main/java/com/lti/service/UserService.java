@@ -2,6 +2,7 @@ package com.lti.service;
 
 import java.util.List;
 
+import com.lti.dto.LoginResponseDto;
 import com.lti.dto.UpdateUserDto;
 import com.lti.entity.User;
 
@@ -12,7 +13,7 @@ public interface UserService {
 	
 	User findUser(int userId);
 	List<User> viewAllUsers();
-	String userLogin(int userId,String password);
+	LoginResponseDto userLogin(int userId,String password);
 	
 	String addJoiningFee(int userId,double joiningFee);
 

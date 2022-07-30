@@ -35,7 +35,7 @@ public class AdminDaoTest {
 
 	@Test
 	public void activateCardTest() {
-		assertTrue(dao.activateCard(2001));
+		assertTrue(dao.activateUserAndAddCard(200));
 	}
 	
 	@Test

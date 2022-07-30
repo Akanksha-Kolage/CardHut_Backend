@@ -6,5 +6,5 @@ public interface EmiCardDao {
 	
 	EmiCard addOrUpdateEmiCard(EmiCard emiCard);
 	EmiCard getEmiCardByUserId(int userId);
-//	EmiCard addEmiCardForUser(int userId);
+
 }
