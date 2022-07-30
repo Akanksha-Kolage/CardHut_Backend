@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 
@@ -81,7 +82,8 @@ public class UserServiceTest {
 	
 	@Test
 	public void login() {
-		System.out.println(userService.userLogin(202, "john123"));
+		assertTrue(userService.userLogin(202, "john123").getUser().isEligible());
+		
 		
 	}
 	

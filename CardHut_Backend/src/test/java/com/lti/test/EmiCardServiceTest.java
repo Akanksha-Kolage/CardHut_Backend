@@ -37,11 +37,11 @@ public class EmiCardServiceTest {
 		EmiCard emiCard = new EmiCard();
 		User user=dao1.getUserById(22);
 		emiCard.setEmiValidity("202");
-		emiCard.setEmiCardType(CardType.gold);
+		emiCard.setEmiCardType(CardType.gold.toString());
 		emiCard.setEmiCardLimit(250000);
 		emiCard.setEmiCardBalance(14500);
 		emiCard.setUser(user);
-		emiCard.setActivated(true);
+	
 
 		String savedEmiCard = emiCardService.addOrUpdateEmiCard(emiCard);
 

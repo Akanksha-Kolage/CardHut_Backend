@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.UserDao;
+import com.lti.dto.LoginResponseDto;
 import com.lti.dto.UpdateUserDto;
 import com.lti.entity.User;
 import com.lti.exception.UserIdMissingException;
@@ -84,9 +85,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.viewAllUsers();
 	}
 
-	public String userLogin(int userId, String password) {
+	public LoginResponseDto userLogin(int userId, String password) {
 		// TODO Auto-generated method stub
-		return userDao.login(userId, password) ? "Login Successfull" : "Invalid credentials";
+		return userDao.login(userId, password) ;
 	}
 
 	public String addJoiningFee(int userId, double joiningFee) {
@@ -95,7 +96,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public UpdateUserDto updateUser(User user) {
-		UpdateUserDto updatedUser = new UpdateUserDto();
+		
+		
+		UpdateUserDto updatedUserDto = new UpdateUserDto();
+
+		
 
 		try {
 			if (user.getUserId() == 0) {
@@ -103,14 +108,16 @@ public class UserServiceImpl implements UserService {
 			} else if (userDao.getUserById(user.getUserId()) == null) {
 				throw new UserNotFoundException("User not found.");
 			} else {
-				User user2 = userDao.addOrUpdateUser(user);
-				updatedUser.setUser(user2);
-				updatedUser.setMessage("User has been updated");
-				return updatedUser;
+			
+				User updatedUser = userDao.addOrUpdateUser(user);
+				
+				updatedUserDto.setUser(updatedUser);
+				updatedUserDto.setMessage("User has been updated");
+				return updatedUserDto;
 			}
 		} catch (Exception e) {
-			updatedUser.setMessage(e.getMessage());
-			return updatedUser;
+			updatedUserDto.setMessage(e.getMessage());
+			return updatedUserDto;
 		}
 	}
 

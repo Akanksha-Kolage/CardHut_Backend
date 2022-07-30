@@ -20,10 +20,7 @@ public class AdminServiceTest {
 		service = context.getBean(AdminService.class);
 	}
 	
-	@Test
-	public void activateCardTest() {
-		assertTrue(service.activateCard(2001));
-	}
+
 	
 	@Test
 	public void adminLoginTest() {

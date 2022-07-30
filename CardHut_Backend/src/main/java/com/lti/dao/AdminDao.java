@@ -4,6 +4,6 @@ import com.lti.entity.Admin;
 
 public interface AdminDao {
 	Admin addAdmin(Admin admin);
-	boolean activateCard(int emiCardNo);
+	boolean activateUserAndAddCard(int userId);
 	boolean adminLogin(String adminUsername, String adminPassword);
 }

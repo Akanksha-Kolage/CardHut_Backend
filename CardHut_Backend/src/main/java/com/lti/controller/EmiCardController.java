@@ -9,28 +9,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.entity.EmiCard;
+import com.lti.entity.User;
 import com.lti.service.EmiCardService;
+import com.lti.service.UserService;
 
 //import oracle.jdbc.proxy.annotation.Post;
 
-
 @RestController
-@RequestMapping("cards")
+@RequestMapping("/cards")
 public class EmiCardController {
-	
+
 	@Autowired
 	EmiCardService emiCardService;
-	
-	@PostMapping("/validateCard")
-	public String addEmiCard(@RequestBody EmiCard emiCard) {
+
+	@Autowired
+	UserService userService;
+
+	@PostMapping("/addCard/{userId}")
+	public String addEmiCard(@PathVariable int userId, @RequestBody EmiCard emiCard) {
+
+		emiCard.setUser(userService.findUser(userId));
 		return emiCardService.addOrUpdateEmiCard(emiCard);
 	}
-	
+
 	@GetMapping("/viewEmiCard/{userId}")
-	public EmiCard viewEmiCard(@PathVariable int userId)
-	{
+	public EmiCard viewEmiCard(@PathVariable int userId) {
 		return emiCardService.getEmiCardByUserId(21);
 	}
-	
 
 }

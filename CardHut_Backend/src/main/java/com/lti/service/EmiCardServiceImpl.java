@@ -18,7 +18,7 @@ public class EmiCardServiceImpl implements EmiCardService {
 	public String addOrUpdateEmiCard(EmiCard emiCard) {
 		EmiCard emiCard1 = emiCardDao.addOrUpdateEmiCard(emiCard);
 		if (emiCard1 != null) {
-			return "EMI CARD VALIDATED";
+			return "Emi Card Added";
 		} else {
 			return "Unexpected Error Occured";
 		}
