@@ -36,7 +36,7 @@ public class EmiCardDaoImpl implements EmiCardDao {
 		} catch (Exception e) {
 			return null;
 		}
-//		User user= new User();
+
 	}
 
 }

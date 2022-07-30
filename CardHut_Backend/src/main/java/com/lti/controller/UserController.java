@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.dto.LoginDto;
+import com.lti.dto.LoginResponseDto;
 import com.lti.dto.UpdateUserDto;
 import com.lti.entity.User;
 import com.lti.service.UserService;
@@ -49,9 +50,9 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestBody LoginDto dto) {
-		String message = userService.userLogin(dto.getUserId(), dto.getPassword());
-		return message;
+	public LoginResponseDto login(@RequestBody LoginDto dto) {
+		return userService.userLogin(dto.getUserId(), dto.getPassword());
+		
 
 	}
 

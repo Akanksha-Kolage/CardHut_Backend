@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.UserDao;
+import com.lti.dto.LoginResponseDto;
 import com.lti.dto.UpdateUserDto;
 import com.lti.entity.User;
 import com.lti.exception.UserIdMissingException;
@@ -18,6 +19,18 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userDao;
 	
+	
+//	#Outlook
+//	#spring.mail.properties.mail.smtp.connecttimeout=50000
+//	#spring.mail.properties.mail.smtp.timeout=30000
+//	#spring.mail.properties.mail.smtp.writetimeout=50000
+//	#spring.mail.host=smtp.office365.com
+//	#spring.mail.port=587
+//	#spring.mail.username=CardHutBusiness@outlook.com
+//	#spring.mail.password=CardHut123#
+//	#spring.mail.properties.mail.smtp.starttls.enable=true
+//	#spring.mail.properties.mail.smtp.auth=true
+
 
 	public String signUp(User user) {
 		// TODO Auto-generated method stub
@@ -30,7 +43,7 @@ public class UserServiceImpl implements UserService {
 				String email = persistedUser.getEmail();
 //				emailService.sendEmailForSignUp(email, text, subject);
 
-				return "Sign up successful. User ID is " + persistedUser.getUserId();
+				return "Sign up successfull.Email verification mail has been sent to you";
 			} catch (Exception e) {
 
 				return "Unexpected error occured during email verification";
@@ -72,9 +85,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.viewAllUsers();
 	}
 
-	public String userLogin(int userId, String password) {
+	public LoginResponseDto userLogin(int userId, String password) {
 		// TODO Auto-generated method stub
-		return userDao.login(userId, password) ? "Login Successful" : "Invalid credentials";
+		return userDao.login(userId, password) ;
 	}
 
 	public String addJoiningFee(int userId, double joiningFee) {
@@ -83,7 +96,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public UpdateUserDto updateUser(User user) {
-		UpdateUserDto updatedUser = new UpdateUserDto();
+		
+		
+		UpdateUserDto updatedUserDto = new UpdateUserDto();
+
+		
 
 		try {
 			if (user.getUserId() == 0) {
@@ -91,14 +108,16 @@ public class UserServiceImpl implements UserService {
 			} else if (userDao.getUserById(user.getUserId()) == null) {
 				throw new UserNotFoundException("User not found.");
 			} else {
-				User user2 = userDao.addOrUpdateUser(user);
-				updatedUser.setUser(user2);
-				updatedUser.setMessage("User has been updated");
-				return updatedUser;
+			
+				User updatedUser = userDao.addOrUpdateUser(user);
+				
+				updatedUserDto.setUser(updatedUser);
+				updatedUserDto.setMessage("User has been updated");
+				return updatedUserDto;
 			}
 		} catch (Exception e) {
-			updatedUser.setMessage(e.getMessage());
-			return updatedUser;
+			updatedUserDto.setMessage(e.getMessage());
+			return updatedUserDto;
 		}
 	}
 
