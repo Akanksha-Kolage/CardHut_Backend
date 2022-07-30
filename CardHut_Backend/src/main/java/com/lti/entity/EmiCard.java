@@ -23,10 +23,10 @@ public class EmiCard {
 	@GeneratedValue(generator = "card_seq", strategy = GenerationType.SEQUENCE)
 	private int emiCardNo;
 	private String emiValidity;
-	private CardType emiCardType;
+	private String emiCardType;
 	private double emiCardLimit;
 	private double emiCardBalance;
-	private boolean activated;
+
 	
 	//Mappings
 	@OneToOne
@@ -36,7 +36,11 @@ public class EmiCard {
 	@OneToMany(mappedBy = "emiCard",cascade = CascadeType.ALL)
 	List<Transaction> transactions;
 	
+	public EmiCard() {
+		
+	}
 	//Getters and Setters
+	
 	
 	public int getEmiCardNo() {
 		return emiCardNo;
@@ -54,11 +58,11 @@ public class EmiCard {
 		this.emiValidity = emiValidity;
 	}
 
-	public CardType getEmiCardType() {
+	public String getEmiCardType() {
 		return emiCardType;
 	}
 
-	public void setEmiCardType(CardType emiCardType) {
+	public void setEmiCardType(String emiCardType) {
 		this.emiCardType = emiCardType;
 	}
 
@@ -78,13 +82,7 @@ public class EmiCard {
 		this.emiCardBalance = emiCardBalance;
 	}
 
-	public boolean isActivated() {
-		return activated;
-	}
 
-	public void setActivated(boolean activated) {
-		this.activated = activated;
-	}
 
 	public User getUser() {
 		return user;
@@ -102,22 +100,10 @@ public class EmiCard {
 		this.transactions = transactions;
 	}
 	
-	public EmiCard() {
-		
-	}
+
 	
 	//Parameterized Constructors
 	
-	public EmiCard(int emiCardNo, String emiValidity, CardType emiCardType, double emiCardLimit, double emiCardBalance,
-			boolean activated, User user, List<Transaction> transactions) {
-		this.emiCardNo = emiCardNo;
-		this.emiValidity = emiValidity;
-		this.emiCardType = emiCardType;
-		this.emiCardLimit = emiCardLimit;
-		this.emiCardBalance = emiCardBalance;
-		this.activated = activated;
-		this.user = user;
-		this.transactions = transactions;
-	}
+
 	
 }

@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.lti.dto.LoginResponseDto;
 import com.lti.entity.User;
 
 
@@ -58,32 +59,67 @@ public class UserDaoImpl implements UserDao {
 		return query.getResultList();
 	}
 
-	public boolean login(int userId, String password) {
+	public LoginResponseDto login(int userId, String password) {
 		// TODO Auto-generated method stub
+		LoginResponseDto loginResponseDto=new LoginResponseDto();
 		String jpql="select u from User u where u.userId=:uid and u.userPassword=:pwd";
 		
 		TypedQuery<User> query=em.createQuery(jpql, User.class);
 		query.setParameter("uid", userId);
 		query.setParameter("pwd", password);
 		
-		User user=null;
+		
 		try {
-			user=query.getSingleResult();
+			User user=query.getSingleResult();
+			loginResponseDto.setUser(user);
+
+			if(user.isEligible()) {
+				
+				loginResponseDto.setMessage("");
+				
+				
+			}
+			else {
+				loginResponseDto.setMessage("You have not been validated by the admin");
+				
+				
+			}
+			return loginResponseDto;
 		}
 		catch(Exception e){
-			
-			return false;
-			
+			loginResponseDto.setUser(null);
+			loginResponseDto.setMessage("Invalid Credentials");
+	
 		}
 		
-		return user!=null?true:false;
+		return loginResponseDto;
 	}
+	
 
 	public boolean addJoiningFee(int userId,double joiningFee) {
 		// TODO Auto-generated method stub
 		
 		return false;
 	}
+
+
+	@Transactional
+	public User activateUser(int userId) {
+		// TODO Auto-generated method stub
+		
+		User nonActiveUser=getUserById(userId);
+		nonActiveUser.setEligible(true);
+		try {
+			User activeUser=em.merge(nonActiveUser);
+			return activeUser;
+		} catch (Exception e) {
+			return null;
+			// TODO: handle exception
+		}
+		
+	}
+	
+	
 
 
 

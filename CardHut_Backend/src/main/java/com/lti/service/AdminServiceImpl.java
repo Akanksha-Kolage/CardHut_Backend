@@ -11,8 +11,8 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminDao adminDao;
 
-	public boolean activateCard(int emiCardNo) {
-		if(adminDao.activateCard(emiCardNo)) {
+	public boolean activateUserAndAddCard(int userId) {
+		if(adminDao.activateUserAndAddCard(userId)) {
 			return true;
 		}
 		else {
