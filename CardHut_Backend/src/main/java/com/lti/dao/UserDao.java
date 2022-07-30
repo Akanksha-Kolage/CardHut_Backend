@@ -11,7 +11,7 @@ public interface UserDao {
 	List<User> viewAllUsers();
 	boolean login(int userId,String password);
 	
-	boolean addJoiningFee(int userId);
+	boolean addJoiningFee(int userId,double joiningFee);
 	
 	
 
