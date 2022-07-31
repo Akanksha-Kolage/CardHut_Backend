@@ -7,38 +7,53 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.lti.entity.EmiCard;
 import com.lti.entity.Transaction;
 import com.lti.entity.User;
 
 @Repository
 public class TransactionDaoImpl implements TransactionDao {
+	
+	@Autowired
+	EmiCardDao emiCardDao;
+	
 	@PersistenceContext
 	EntityManager em;
     
 	@Transactional
-	public Transaction addTransactionOfProduct(Transaction transaction) {
+	public Transaction addOrUpdateTransaction(Transaction transaction) {
 		// TODO Auto-generated method stub
-		Transaction persistedTransaction=em.merge(transaction);
-		return persistedTransaction;
+		try {
+			Transaction persistedTransaction=em.merge(transaction);
+			return persistedTransaction;
+		}
+		catch(Exception e){
+			return null;
+		}
+		
 	}
 
-	public List<Transaction> viewTransactionByCardNo(int cardNo) {
-		// TODO Auto-generated method stub
-		String jpql = "select t from Transaction t where t.cardNo=:cno ";
-		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
-		query.setParameter("cno", cardNo);
-		return query.getResultList();
+	public List<Transaction> viewTransactionsByCardNo(int cardNo) {
+		
+		EmiCard emiCard = emiCardDao.getEmiCardByCardNo(cardNo);
+		List<Transaction> transactions = emiCard.getTransactions();
+		return transactions;
 	}
 
-	public List<Transaction> viewTransactionsByProductId(int productId) {
-		// TODO Auto-generated method stub
-		String jpql = "select t from Transaction t where t.productId=:pid ";
+
+	public Transaction viewTransactionByCardNoAndProductId(int emiCardNo, int productId) {
+		String jpql = "select t from Transaction t where t.emiCard.emiCardNo =: ec and t.product.productId=: pid";
 		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
 		query.setParameter("pid", productId);
-		return query.getResultList();
+		query.setParameter("ec", emiCardNo);
+		Transaction transaction = query.getSingleResult();
+		return transaction;
 	}
+
+
 
 }

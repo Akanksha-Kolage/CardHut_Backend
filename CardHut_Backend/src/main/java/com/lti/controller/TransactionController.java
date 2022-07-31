@@ -11,30 +11,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.dto.TransactionProductEmiCardDto;
+import com.lti.entity.Product;
 import com.lti.entity.Transaction;
 import com.lti.entity.User;
 import com.lti.service.TransactionService;
 
 @RestController
-@RequestMapping("/testing")
-@CrossOrigin(origins="*")
+@RequestMapping("/transaction")
+@CrossOrigin
 public class TransactionController {
+	
 	@Autowired
 	TransactionService transactionService;
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addTransactionOfProduct(@RequestBody Transaction transaction) {
-		String message = transactionService.addTransactionOfProduct(transaction);
-		return message;
+	@RequestMapping(value = "/addTransaction", method = RequestMethod.POST)
+	public Transaction addTransaction(@RequestBody TransactionProductEmiCardDto transactionProductEmiCardDto) {
+		Transaction transaction = transactionProductEmiCardDto.getTransaction();
+		transaction.setProduct(transactionProductEmiCardDto.getProduct());
+		transaction.setEmiCard(transactionProductEmiCardDto.getEmiCard());
+		return transactionService.addOrUpdateTransaction(transaction);
 	}
 	
-	@GetMapping("/viewAllByCardNo/{cardNo}")
-	public List<Transaction> viewTransactionByCardNo(@PathVariable int cardNo){
-		return transactionService.viewTransactionByCardNo(cardNo);
+	@RequestMapping(value = "/updateTransaction", method = RequestMethod.PUT)
+	public Transaction updateTransaction(@RequestBody Transaction transaction) {
+		return transactionService.addOrUpdateTransaction(transaction);
 	}
-	@GetMapping("/viewAllByProductId/{productId}")
-	public List<Transaction> viewTransactionByProductId(@PathVariable int productId){
-		return transactionService.viewTransactionsByProductId(productId);
+	
+	@GetMapping("/viewAllTransactions/{cardNo}")
+	public List<Transaction> viewTransactionsByCardNo(@PathVariable int cardNo){
+		return transactionService.viewTransactionsByCardNo(cardNo);
 	}
-
+	
+	@GetMapping("/getTransaction/{emiCardNo}/{productId}")
+	public Transaction getTransaction( @PathVariable int emiCardNo, @PathVariable int productId){
+		return transactionService.viewTransactionByCardNoAndProductId(emiCardNo, productId);
+	}
+	
 }

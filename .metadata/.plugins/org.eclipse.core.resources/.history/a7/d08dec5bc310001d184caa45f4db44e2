@@ -1,0 +1,12 @@
+package com.lti.dto;
+
+import com.lti.entity.EmiCard;
+import com.lti.entity.Product;
+import com.lti.entity.Transaction;
+
+public class TransactionProductEmiCardDto {
+	
+	Transaction transaction;
+	Product product;
+	EmiCard emiCard;
+}

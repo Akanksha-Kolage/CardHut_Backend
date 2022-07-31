@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
@@ -103,24 +104,35 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
+//	@Transactional
+//	public User activateUser(int userId) {
+//		// TODO Auto-generated method stub
+//		
+//		User nonActiveUser=getUserById(userId);
+//		nonActiveUser.setEligible(true);
+//		try {
+//			User activeUser=em.merge(nonActiveUser);
+//			return activeUser;
+//		} catch (Exception e) {
+//			return null;
+//			// TODO: handle exception
+//		}
+//		
+//	}
+	
 	@Transactional
 	public User activateUser(int userId) {
-		// TODO Auto-generated method stub
-		
-		User nonActiveUser=getUserById(userId);
-		nonActiveUser.setEligible(true);
-		try {
-			User activeUser=em.merge(nonActiveUser);
-			return activeUser;
-		} catch (Exception e) {
-			return null;
-			// TODO: handle exception
+		String jpql = "update User u set u.eligible=:approve where u.userId=:uid";
+		Query query = em.createQuery(jpql);
+		query.setParameter("approve", true);
+		query.setParameter("uid", userId);
+		int rec = query.executeUpdate();
+		if(rec!=0) {
+			return getUserById(userId);
 		}
-		
+		else {
+			return null;
+		}
 	}
-	
-	
-
-
 
 }

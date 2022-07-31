@@ -13,26 +13,22 @@ public class TransactionServiceimpl implements TransactionService {
 	@Autowired
 	TransactionDao transactionDao;
 
-	public String addTransactionOfProduct(Transaction transaction) {
-		// TODO Auto-generated method stub
+	public Transaction addOrUpdateTransaction(Transaction transaction) {
 		try {
-		Transaction transaction2= transactionDao.addTransactionOfProduct(transaction);
-		return "Transaction Completed Sucessfully. Your Transaction Id is"+transaction2.getTransactionId();
-		}
-		catch(Exception e) {
-			return "Can't complete transaction";
-		}
-		
+			Transaction updatedtransaction= transactionDao.addOrUpdateTransaction(transaction);
+			return updatedtransaction;
+			}
+			catch(Exception e) {
+				return null;
+			}
 	}
 
-	public List<Transaction> viewTransactionByCardNo(int cardNo) {
-		// TODO Auto-generated method stub
-		return transactionDao.viewTransactionByCardNo(cardNo);
+	public List<Transaction> viewTransactionsByCardNo(int cardNo) {
+		return transactionDao.viewTransactionsByCardNo(cardNo);
 	}
 
-	public List<Transaction> viewTransactionsByProductId(int productId) {
-		// TODO Auto-generated method stub
-		return transactionDao.viewTransactionsByProductId(productId);
+	public Transaction viewTransactionByCardNoAndProductId(int emiCardNo, int productId) {
+		return transactionDao.viewTransactionByCardNoAndProductId(emiCardNo,productId);
 	}
 
 }

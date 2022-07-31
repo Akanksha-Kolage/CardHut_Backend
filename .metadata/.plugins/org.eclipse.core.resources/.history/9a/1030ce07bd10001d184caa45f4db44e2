@@ -1,0 +1,46 @@
+package com.lti.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.lti.dao.TransactionDao;
+import com.lti.entity.Transaction;
+
+@Component
+public class TransactionServiceimpl implements TransactionService {
+	@Autowired
+	TransactionDao transactionDao;
+
+	public List<Transaction> viewTransactionByCardNo(int cardNo) {
+		// TODO Auto-generated method stub
+		return transactionDao.viewTransactionByCardNo(cardNo);
+	}
+
+	public List<Transaction> viewTransactionsByProductId(int productId) {
+		// TODO Auto-generated method stub
+		return transactionDao.viewTransactionsByProductId(productId);
+	}
+
+	public Transaction addOrUpdateTransaction(Transaction transaction) {
+		try {
+			Transaction updatedtransaction= transactionDao.addOrUpdateTransaction(transaction);
+			return updatedtransaction;
+			}
+			catch(Exception e) {
+				return null;
+			}
+	}
+
+	public List<Transaction> viewTransactionsByCardNo(int cardNo) {
+		
+		return null;
+	}
+
+	public Transaction viewTransactionByCardNoAndProductId(int emiCardNo, int productId) {
+		
+		return null;
+	}
+
+}

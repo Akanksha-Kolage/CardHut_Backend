@@ -6,10 +6,7 @@ import com.lti.entity.Transaction;
 
 public interface TransactionDao {
 	
-	Transaction addTransactionOfProduct(Transaction transaction);
-	List<Transaction> viewTransactionByCardNo(int cardNo);
-	List<Transaction> viewTransactionsByProductId(int productId);
-	
-	
-
+	Transaction addOrUpdateTransaction(Transaction transaction);
+	List<Transaction> viewTransactionsByCardNo(int cardNo);
+	Transaction viewTransactionByCardNoAndProductId(int emiCardNo, int productId);
 }

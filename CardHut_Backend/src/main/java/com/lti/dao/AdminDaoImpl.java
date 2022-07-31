@@ -77,7 +77,7 @@ public class AdminDaoImpl implements AdminDao {
 //		return true;
 	}
 
-	@Override
+	
 	public boolean activateUserAndAddCard(int userId) {
 		// TODO Auto-generated method stub
 		User activeUser = userDao.activateUser(userId);
@@ -95,7 +95,7 @@ public class AdminDaoImpl implements AdminDao {
 		emiCard.setEmiValidity("2024");
 		emiCard.setUser(activeUser);
 		emiCardDao.addOrUpdateEmiCard(emiCard);
-
+		
 		return true;
 	}
 

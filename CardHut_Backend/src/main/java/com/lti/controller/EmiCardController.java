@@ -1,6 +1,7 @@
 package com.lti.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.lti.service.UserService;
 //import oracle.jdbc.proxy.annotation.Post;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/cards")
 public class EmiCardController {
 
@@ -34,7 +36,7 @@ public class EmiCardController {
 
 	@GetMapping("/viewEmiCard/{userId}")
 	public EmiCard viewEmiCard(@PathVariable int userId) {
-		return emiCardService.getEmiCardByUserId(21);
+		return emiCardService.getEmiCardByUserId(userId);
 	}
 
 }

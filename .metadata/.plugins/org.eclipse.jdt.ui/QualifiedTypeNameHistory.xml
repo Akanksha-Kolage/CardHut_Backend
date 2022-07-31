@@ -4,5 +4,17 @@
     <fullyQualifiedTypeName name="javax.persistence.FetchType"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
+    <fullyQualifiedTypeName name="javax.persistence.Query"/>
+    <fullyQualifiedTypeName name="com.lti.entity.User"/>
+    <fullyQualifiedTypeName name="com.lti.dao.UserDao"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.lti.dao.EmiCardDao"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="javax.persistence.TypedQuery"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="com.lti.entity.Product"/>
+    <fullyQualifiedTypeName name="com.lti.entity.EmiCard"/>
+    <fullyQualifiedTypeName name="com.lti.dto.TransactionProductEmiCardDto"/>
+    <fullyQualifiedTypeName name="com.lti.entity.Transaction"/>
 </qualifiedTypeNameHistroy>

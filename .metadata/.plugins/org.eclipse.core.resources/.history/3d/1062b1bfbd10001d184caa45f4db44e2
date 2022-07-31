@@ -1,0 +1,46 @@
+package com.lti.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lti.entity.Transaction;
+import com.lti.entity.User;
+import com.lti.service.TransactionService;
+
+@RestController
+@RequestMapping("/transaction")
+@CrossOrigin
+public class TransactionController {
+	
+	@Autowired
+	TransactionService transactionService;
+	
+	@RequestMapping(value = "/addTransaction", method = RequestMethod.POST)
+	public Transaction addTransaction(@RequestBody Transaction transaction) {
+		return transactionService.addOrUpdateTransaction(transaction);
+	}
+	
+	@RequestMapping(value = "/updateTransaction", method = RequestMethod.PUT)
+	public Transaction updateTransaction(@RequestBody Transaction transaction) {
+		return transactionService.addOrUpdateTransaction(transaction);
+	}
+	
+	@GetMapping("/viewAllByCardNo/{cardNo}")
+	public List<Transaction> viewTransactionsByCardNo(@PathVariable int cardNo){
+		return transactionService.viewTransactionsByCardNo(cardNo);
+	}
+	
+	@GetMapping("/viewAllByProductId/{productId}/{cardNo}")
+	public List<Transaction> getTransaction(@PathVariable int productId, @PathVariable int cardNo){
+		return transactionService.viewTransactionByCardNoAndProductId(productId);
+	}
+
+}
