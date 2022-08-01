@@ -25,17 +25,22 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 	
+//	@RequestMapping(value = "/addTransaction", method = RequestMethod.POST)
+//	public Transaction addTransaction(@RequestBody TransactionProductEmiCardDto transactionProductEmiCardDto) {
+//		Transaction transaction = transactionProductEmiCardDto.getTransaction();
+//		transaction.setProduct(transactionProductEmiCardDto.getProduct());
+//		transaction.setEmiCard(transactionProductEmiCardDto.getEmiCard());
+//		return transactionService.addOrUpdateTransaction(transaction);
+//	}
+	
 	@RequestMapping(value = "/addTransaction", method = RequestMethod.POST)
-	public Transaction addTransaction(@RequestBody TransactionProductEmiCardDto transactionProductEmiCardDto) {
-		Transaction transaction = transactionProductEmiCardDto.getTransaction();
-		transaction.setProduct(transactionProductEmiCardDto.getProduct());
-		transaction.setEmiCard(transactionProductEmiCardDto.getEmiCard());
+	public Transaction addTransaction(@RequestBody Transaction transaction) {
 		return transactionService.addOrUpdateTransaction(transaction);
 	}
 	
 	@RequestMapping(value = "/updateTransaction", method = RequestMethod.PUT)
 	public Transaction updateTransaction(@RequestBody Transaction transaction) {
-		return transactionService.addOrUpdateTransaction(transaction);
+		return transactionService.updateTransaction(transaction);
 	}
 	
 	@GetMapping("/viewAllTransactions/{cardNo}")

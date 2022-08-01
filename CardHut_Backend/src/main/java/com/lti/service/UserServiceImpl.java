@@ -19,6 +19,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userDao;
 	
+	@Autowired
+	EmailService emailService;
 	
 //	#Outlook
 //	#spring.mail.properties.mail.smtp.connecttimeout=50000
@@ -41,11 +43,11 @@ public class UserServiceImpl implements UserService {
 				String subject = "Registration confirmation";
 				String text = "Your user id is " + persistedUser.getUserId();
 				String email = persistedUser.getEmail();
-//				emailService.sendEmailForSignUp(email, text, subject);
+				emailService.sendEmailForSignup(email, text, subject);
 
-				return "Sign up successfull.Email verification mail has been sent to you";
+				return "Sign up successful. Email verification mail has been sent to you";
 			} catch (Exception e) {
-
+				System.out.println(e.getMessage());
 				return "Unexpected error occured during email verification";
 			}
 		}
@@ -99,8 +101,6 @@ public class UserServiceImpl implements UserService {
 		
 		
 		UpdateUserDto updatedUserDto = new UpdateUserDto();
-
-		
 
 		try {
 			if (user.getUserId() == 0) {

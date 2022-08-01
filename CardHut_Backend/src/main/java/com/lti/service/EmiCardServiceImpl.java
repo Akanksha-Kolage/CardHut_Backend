@@ -29,4 +29,9 @@ public class EmiCardServiceImpl implements EmiCardService {
 		return emiCard1;
 	}
 
+	
+	public EmiCard updateEmiCard(EmiCard emiCard) {
+		return emiCardDao.addOrUpdateEmiCard(emiCard);
+	}
+
 }

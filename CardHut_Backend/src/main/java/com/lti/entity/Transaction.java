@@ -23,6 +23,7 @@ public class Transaction {
 	private LocalDate orderDate;
 	private double paidAmount;
 	private double balanceAmount;
+	private double totalAmount;
 	private int emiPaid;
 	private int emiRemaining;
 	
@@ -43,12 +44,16 @@ public class Transaction {
 	//Parameterized Constructors
 	
 	public Transaction(int transactionId, int emiScheme, LocalDate orderDate, double paidAmount, double balanceAmount,
-			EmiCard emiCard, Product product) {
+			double totalAmount, int emiPaid, int emiRemaining, EmiCard emiCard, Product product) {
+		super();
 		this.transactionId = transactionId;
 		this.emiScheme = emiScheme;
 		this.orderDate = orderDate;
 		this.paidAmount = paidAmount;
 		this.balanceAmount = balanceAmount;
+		this.totalAmount = totalAmount;
+		this.emiPaid = emiPaid;
+		this.emiRemaining = emiRemaining;
 		this.emiCard = emiCard;
 		this.product = product;
 	}
@@ -59,6 +64,8 @@ public class Transaction {
 		return transactionId;
 	}
 
+
+	
 
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
@@ -138,6 +145,14 @@ public class Transaction {
 
 	public void setEmiRemaining(int emiRemaining) {
 		this.emiRemaining = emiRemaining;
+	}
+
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
 	

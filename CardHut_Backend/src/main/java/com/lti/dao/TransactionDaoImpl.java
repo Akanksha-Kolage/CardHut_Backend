@@ -28,6 +28,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	public Transaction addOrUpdateTransaction(Transaction transaction) {
 		// TODO Auto-generated method stub
 		try {
+			transaction.getEmiCard().setEmiCardBalance(transaction.getEmiCard().getEmiCardBalance() - transaction.getPaidAmount());
 			Transaction persistedTransaction=em.merge(transaction);
 			return persistedTransaction;
 		}

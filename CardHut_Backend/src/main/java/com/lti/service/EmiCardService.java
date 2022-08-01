@@ -9,5 +9,6 @@ public interface EmiCardService {
 	
 	String addOrUpdateEmiCard(EmiCard emiCard);
 	EmiCard getEmiCardByUserId(int userId);
+	EmiCard updateEmiCard(EmiCard emiCard);
 	
 }
