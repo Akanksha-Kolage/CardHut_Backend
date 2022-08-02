@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.dto.ForgetPasswordDto;
 import com.lti.dto.LoginDto;
 import com.lti.dto.LoginResponseDto;
 import com.lti.dto.UpdateUserDto;
@@ -49,11 +50,16 @@ public class UserController {
 
 	}
 
-	@PostMapping("/login")
-	public LoginResponseDto login(@RequestBody LoginDto dto) {
-		return userService.userLogin(dto.getUserId(), dto.getPassword());
+//	@PostMapping("/login")
+//	public LoginResponseDto login(@RequestBody LoginDto dto) {
+//		return userService.userLogin(dto.getUserId(), dto.getPassword());
+//
+//	}
+	
+	@PutMapping("/forgotPassword/{userId}")
+	public ForgetPasswordDto forgotPassword(@PathVariable int userId) {
+		return userService.forgotPassword(userId);
 		
-
 	}
 
 }

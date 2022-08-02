@@ -39,6 +39,9 @@ public class User {
 	private String userIfsc;
 
 	private boolean eligible;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	EmiCard emiCard;
 
 	public boolean isEligible() {
 		return eligible;
@@ -48,11 +51,6 @@ public class User {
 		this.eligible = eligible;
 	}
 
-	// Mappings
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	EmiCard emiCard;
-
-	// Parameterized Constructors
 
 	public User() {
 		// TODO Auto-generated constructor stub

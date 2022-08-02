@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.UserDao;
+import com.lti.dto.ForgetPasswordDto;
 import com.lti.dto.LoginResponseDto;
 import com.lti.dto.UpdateUserDto;
 import com.lti.entity.User;
@@ -76,7 +77,7 @@ public class UserServiceImpl implements UserService {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e.getMessage());
+	
 			return null;
 		}
 	
@@ -87,10 +88,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.viewAllUsers();
 	}
 
-	public LoginResponseDto userLogin(int userId, String password) {
-		// TODO Auto-generated method stub
-		return userDao.login(userId, password) ;
-	}
+//	public LoginResponseDto userLogin(int userId, String password) {
+//		// TODO Auto-generated method stub
+//		return userDao.login(userId, password) ;
+//	}
 
 	public String addJoiningFee(int userId, double joiningFee) {
 		// TODO Auto-generated method stub
@@ -119,6 +120,13 @@ public class UserServiceImpl implements UserService {
 			updatedUserDto.setMessage(e.getMessage());
 			return updatedUserDto;
 		}
+	}
+
+
+	public ForgetPasswordDto forgotPassword(int userId) {
+		// TODO Auto-generated method stub
+		
+		return userDao.forgotPassword(userId);
 	}
 
 }
