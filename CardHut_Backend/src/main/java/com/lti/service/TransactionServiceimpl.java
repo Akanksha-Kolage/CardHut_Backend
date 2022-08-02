@@ -24,16 +24,9 @@ public class TransactionServiceimpl implements TransactionService {
 	}
 	
 	public Transaction updateTransaction(Transaction transaction) {
-		if(transaction.getEmiRemaining()!=0) {
-			transaction.setEmiPaid(transaction.getEmiPaid()+1);
-			transaction.setEmiRemaining(transaction.getEmiRemaining()-1);
-			transaction.setPaidAmount(transaction.getPaidAmount() + (transaction.getProduct().getProductCost()/transaction.getEmiScheme()));
-			transaction.setBalanceAmount(transaction.getTotalAmount()-transaction.getPaidAmount());
-			return transactionDao.addOrUpdateTransaction(transaction);
-		}
-		else 
-			transaction.setBalanceAmount(0);
-			return transaction;
+		return transactionDao.addOrUpdateTransaction(transaction);
+		
+
 	}
 
 
