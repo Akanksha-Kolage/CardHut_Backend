@@ -14,7 +14,7 @@ public class EmailService {
 	public void sendEmailForSignup(String email, String text, String subject) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(email);
-		message.setFrom("akankshakolage@outlook.com");
+		message.setFrom("CardHutBusiness@outlook.com");
 		message.setSubject(subject);
 		message.setText(text);
 		

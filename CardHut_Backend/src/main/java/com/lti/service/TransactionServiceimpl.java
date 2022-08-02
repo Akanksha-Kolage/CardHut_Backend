@@ -31,7 +31,8 @@ public class TransactionServiceimpl implements TransactionService {
 			transaction.setBalanceAmount(transaction.getTotalAmount()-transaction.getPaidAmount());
 			return transactionDao.addOrUpdateTransaction(transaction);
 		}
-		else
+		else 
+			transaction.setBalanceAmount(0);
 			return transaction;
 	}
 
@@ -42,6 +43,11 @@ public class TransactionServiceimpl implements TransactionService {
 
 	public Transaction viewTransactionByCardNoAndProductId(int emiCardNo, int productId) {
 		return transactionDao.viewTransactionByCardNoAndProductId(emiCardNo,productId);
+	}
+
+
+	public List<Transaction> viewTransactionsForAdmin() {
+		return transactionDao.viewTransactionsForAdmin();
 	}
 
 }

@@ -55,6 +55,12 @@ public class TransactionDaoImpl implements TransactionDao {
 		return transaction;
 	}
 
+	public List<Transaction> viewTransactionsForAdmin() {
+		String jpql = "select t from Transaction t";
+		TypedQuery<Transaction> query = em.createQuery(jpql,Transaction.class);
+		return query.getResultList();
+	}
+
 
 
 }

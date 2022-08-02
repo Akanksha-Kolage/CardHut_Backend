@@ -53,4 +53,9 @@ public class TransactionController {
 		return transactionService.viewTransactionByCardNoAndProductId(emiCardNo, productId);
 	}
 	
+	@GetMapping("/viewTransactions")
+	public List<Transaction> viewTransactionsForAdmin(){
+		return transactionService.viewTransactionsForAdmin();
+	}
+	
 }
